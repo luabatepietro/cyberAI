@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Privacy Shield - Configurações</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>🛡️ Privacy Shield - Configurações</h1>
+      <p>Gerencie suas listas personalizadas de bloqueio e configurações de privacidade.</p>
+    </div>
+
+    <!-- Configurações Gerais -->
+    <div class="card">
+      <h2>⚙️ Configurações Gerais</h2>
+      <div class="setting-row">
+        <div class="setting-info">
+          <label>Bloqueio de Rastreadores</label>
+          <span class="setting-desc">Bloqueia automaticamente requisições para domínios de rastreamento conhecidos.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="blockingEnabled" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="setting-row">
+        <div class="setting-info">
+          <label>Notificações</label>
+          <span class="setting-desc">Exibir notificações quando rastreadores forem bloqueados.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="showNotifications" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Lista de Bloqueio Personalizada -->
+    <div class="card">
+      <h2>🚫 Lista de Bloqueio Personalizada</h2>
+      <p class="card-desc">Adicione domínios que você deseja bloquear, além da lista padrão de rastreadores.</p>
+      
+      <div class="input-group">
+        <input type="text" id="blocklistInput" placeholder="Ex: tracker.example.com" />
+        <button id="addBlocklist" class="btn btn-danger">+ Adicionar</button>
+      </div>
+
+      <div class="list-container" id="blocklistContainer">
+        <div class="empty-state">Nenhum domínio personalizado na lista de bloqueio.</div>
+      </div>
+    </div>
+
+    <!-- Lista de Permissão (Whitelist) -->
+    <div class="card">
+      <h2>✅ Lista de Permissão (Whitelist)</h2>
+      <p class="card-desc">Domínios que nunca serão bloqueados, mesmo que estejam na lista de rastreadores.</p>
+      
+      <div class="input-group">
+        <input type="text" id="whitelistInput" placeholder="Ex: analytics.meusite.com" />
+        <button id="addWhitelist" class="btn btn-success">+ Adicionar</button>
+      </div>
+
+      <div class="list-container" id="whitelistContainer">
+        <div class="empty-state">Nenhum domínio na lista de permissão.</div>
+      </div>
+    </div>
+
+    <!-- Metodologia de Pontuação -->
+    <div class="card">
+      <h2>📊 Metodologia de Pontuação de Privacidade</h2>
+      <p class="card-desc">A pontuação de privacidade (0-100) é calculada com base nos seguintes critérios:</p>
+      
+      <table class="scoring-table">
+        <thead>
+          <tr>
+            <th>Critério</th>
+            <th>Penalidade</th>
+            <th>Máximo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Rastreadores de 3ª parte</td>
+            <td>-3 por rastreador</td>
+            <td>-30 pts</td>
+          </tr>
+          <tr>
+            <td>Rastreadores de 1ª parte</td>
+            <td>-2 por rastreador</td>
+            <td>-10 pts</td>
+          </tr>
+          <tr>
+            <td>Cookies de 3ª parte</td>
+            <td>-1 por cookie</td>
+            <td>-15 pts</td>
+          </tr>
+          <tr>
+            <td>Supercookies</td>
+            <td>-3 por supercookie</td>
+            <td>-10 pts</td>
+          </tr>
+          <tr>
+            <td>localStorage/sessionStorage</td>
+            <td>-1 por chave</td>
+            <td>-5 pts</td>
+          </tr>
+          <tr>
+            <td>Canvas Fingerprinting</td>
+            <td>Detecção</td>
+            <td>-10 pts</td>
+          </tr>
+          <tr>
+            <td>Sincronismo de Cookies</td>
+            <td>Detecção</td>
+            <td>-10 pts</td>
+          </tr>
+          <tr>
+            <td>Ameaças de Hijacking</td>
+            <td>Detecção</td>
+            <td>-15 pts</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="score-legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background: #27ae60"></span>
+          <span>80-100: Excelente privacidade</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #f39c12"></span>
+          <span>60-79: Privacidade moderada</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #e67e22"></span>
+          <span>40-59: Privacidade baixa</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #e74c3c"></span>
+          <span>0-39: Privacidade crítica</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sobre -->
+    <div class="card">
+      <h2>ℹ️ Sobre</h2>
+      <p class="card-desc">
+        <strong>Privacy Shield v1.0.0</strong><br>
+        Extensão desenvolvida para a disciplina de Cybersegurança do Insper.<br>
+        Baseada na lista de rastreadores EasyList/EasyPrivacy.<br><br>
+        <strong>Funcionalidades:</strong> Detecção de domínios de terceiros, cookies (1ª/3ª parte, sessão/persistente), 
+        supercookies, localStorage HTML5, canvas fingerprinting, sincronismo de cookies, ameaças de hijacking, 
+        pontuação de privacidade e bloqueio customizável.
+      </p>
+    </div>
+
+    <div class="footer">
+      <button id="saveBtn" class="btn btn-primary btn-large">💾 Salvar Configurações</button>
+      <span id="saveStatus" class="save-status"></span>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

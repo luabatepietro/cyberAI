@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+  <title>Privacy Shield</title>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <h1>🛡️ Privacy Shield</h1>
+        <div class="toggle-container">
+          <label class="switch">
+            <input type="checkbox" id="blockingToggle" checked>
+            <span class="slider"></span>
+          </label>
+          <span class="toggle-label" id="toggleLabel">Bloqueio Ativo</span>
+        </div>
+      </div>
+      <div class="site-info">
+        <span id="currentSite">Carregando...</span>
+      </div>
+    </div>
+
+    <!-- Pontuação de Privacidade -->
+    <div class="score-section">
+      <div class="score-circle" id="scoreCircle">
+        <svg viewBox="0 0 120 120">
+          <circle class="score-bg" cx="60" cy="60" r="54" />
+          <circle class="score-fill" id="scoreFill" cx="60" cy="60" r="54" />
+        </svg>
+        <div class="score-text">
+          <span class="score-number" id="scoreNumber">--</span>
+          <span class="score-label">Privacidade</span>
+        </div>
+      </div>
+      <div class="score-description" id="scoreDescription">Analisando página...</div>
+    </div>
+
+    <!-- Resumo de Bloqueios -->
+    <div class="stats-grid">
+      <div class="stat-card" data-section="thirdParty">
+        <div class="stat-icon">🌐</div>
+        <div class="stat-info">
+          <span class="stat-value" id="thirdPartyCount">0</span>
+          <span class="stat-label">Domínios 3ª parte</span>
+        </div>
+      </div>
+      <div class="stat-card" data-section="trackers">
+        <div class="stat-icon">👁️</div>
+        <div class="stat-info">
+          <span class="stat-value" id="trackerCount">0</span>
+          <span class="stat-label">Rastreadores</span>
+        </div>
+      </div>
+      <div class="stat-card" data-section="blocked">
+        <div class="stat-icon">🚫</div>
+        <div class="stat-info">
+          <span class="stat-value" id="blockedCount">0</span>
+          <span class="stat-label">Bloqueados</span>
+        </div>
+      </div>
+      <div class="stat-card" data-section="cookies">
+        <div class="stat-icon">🍪</div>
+        <div class="stat-info">
+          <span class="stat-value" id="cookieCount">0</span>
+          <span class="stat-label">Cookies</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seções Expandíveis -->
+    <div class="sections">
+
+      <!-- Rastreadores Detalhados -->
+      <div class="section" id="sectionTrackers">
+        <div class="section-header" data-target="trackersContent">
+          <span>👁️ Rastreadores Detectados</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="trackersContent">
+          <div class="sub-section">
+            <h4>Rastreadores de 1ª Parte</h4>
+            <div id="firstPartyTrackersList" class="domain-list">
+              <span class="empty">Nenhum detectado</span>
+            </div>
+          </div>
+          <div class="sub-section">
+            <h4>Rastreadores de 3ª Parte</h4>
+            <div id="thirdPartyTrackersList" class="domain-list">
+              <span class="empty">Nenhum detectado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cookies -->
+      <div class="section" id="sectionCookies">
+        <div class="section-header" data-target="cookiesContent">
+          <span>🍪 Cookies Detalhados</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="cookiesContent">
+          <div class="cookie-grid">
+            <div class="cookie-item">
+              <span class="cookie-type">1ª Parte - Sessão</span>
+              <span class="cookie-value" id="fp-session">0</span>
+            </div>
+            <div class="cookie-item">
+              <span class="cookie-type">1ª Parte - Persistente</span>
+              <span class="cookie-value" id="fp-persistent">0</span>
+            </div>
+            <div class="cookie-item">
+              <span class="cookie-type">3ª Parte - Sessão</span>
+              <span class="cookie-value" id="tp-session">0</span>
+            </div>
+            <div class="cookie-item">
+              <span class="cookie-type">3ª Parte - Persistente</span>
+              <span class="cookie-value" id="tp-persistent">0</span>
+            </div>
+            <div class="cookie-item highlight">
+              <span class="cookie-type">⚠️ Supercookies</span>
+              <span class="cookie-value" id="supercookies">0</span>
+            </div>
+          </div>
+          <div class="sub-section" id="cookieSyncSection" style="display:none;">
+            <h4>🔄 Sincronismo de Cookies Detectado</h4>
+            <div id="cookieSyncList" class="domain-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- localStorage -->
+      <div class="section" id="sectionStorage">
+        <div class="section-header" data-target="storageContent">
+          <span>💾 Armazenamento Local (HTML5)</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="storageContent">
+          <div id="storageStatus" class="status-badge status-safe">Não detectado</div>
+          <div id="storageDetails" class="storage-details" style="display:none;">
+            <div class="storage-summary">
+              <span>Total de chaves: <strong id="storageKeyCount">0</strong></span>
+              <span>Tamanho: <strong id="storageSize">0 B</strong></span>
+            </div>
+            <div id="storageKeysList" class="domain-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas Fingerprinting -->
+      <div class="section" id="sectionCanvas">
+        <div class="section-header" data-target="canvasContent">
+          <span>🎨 Canvas Fingerprinting</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="canvasContent">
+          <div id="canvasStatus" class="status-badge status-safe">Não detectado</div>
+          <div id="canvasDetails" style="display:none;">
+            <p class="warning-text">⚠️ Tentativas de canvas fingerprinting foram detectadas nesta página. Este método permite identificar seu navegador de forma única.</p>
+            <span>Tentativas: <strong id="canvasAttempts">0</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hijacking -->
+      <div class="section" id="sectionHijacking">
+        <div class="section-header" data-target="hijackingContent">
+          <span>⚠️ Ameaças de Hijacking</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="hijackingContent">
+          <div id="hijackingStatus" class="status-badge status-safe">Nenhuma ameaça</div>
+          <div id="hijackingList" class="domain-list" style="display:none;"></div>
+        </div>
+      </div>
+
+      <!-- Domínios Bloqueados -->
+      <div class="section" id="sectionBlocked">
+        <div class="section-header" data-target="blockedContent">
+          <span>🚫 Domínios Bloqueados</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="section-content" id="blockedContent">
+          <div id="blockedList" class="domain-list">
+            <span class="empty">Nenhum bloqueado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="footer">
+      <button id="btnOptions" class="btn btn-secondary">⚙️ Configurações</button>
+      <button id="btnReport" class="btn btn-primary">📊 Relatório Completo</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

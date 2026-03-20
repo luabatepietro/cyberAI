@@ -1,0 +1,44 @@
+{
+  "manifest_version": 2,
+  "name": "Privacy Shield - Detector de Rastreadores",
+  "version": "1.0.0",
+  "description": "Extensão para detecção e bloqueio de rastreadores, análise de cookies, localStorage, canvas fingerprinting e pontuação de privacidade.",
+  "author": "Insper - Cybersegurança",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "cookies",
+    "storage",
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["trackers.js", "background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>", "file:///*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    },
+    "default_title": "Privacy Shield",
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
+}
