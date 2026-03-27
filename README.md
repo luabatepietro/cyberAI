@@ -1,6 +1,26 @@
 # Detector de Rastreadores
 
 **Extensão para Firefox** desenvolvida para a disciplina de Cybersegurança do Insper.
+**Feito por: Lucas Abatepietro e Marcelo Alonso**
+
+## O que é o Olha Malandro?
+
+Olha Malandro é uma extensão para Firefox que monitora e protege sua privacidade 
+enquanto você navega. Em tempo real, ela analisa cada página visitada e te mostra 
+o que está acontecendo nos bastidores.
+
+### O que ela detecta e faz:
+
+1. **Rastreadores de 3ª parte** — identifica (e pode bloquear) domínios de publicidade, analytics e redes sociais carregados pela página sem você saber *(Conceito C)*
+2. **Cookies** — classifica todos os cookies encontrados: 1ª/3ª parte, sessão/persistente e supercookies (cookies com expiração anormalmente longa) *(Conceito C)*
+3. **Canvas Fingerprinting** — detecta quando sites tentam criar uma "impressão digital" do seu navegador usando a API Canvas *(Conceito C)*
+4. **localStorage / sessionStorage / IndexedDB** — monitora dados que sites armazenam localmente no seu navegador *(Conceito C)*
+5. **Cookie Syncing** — identifica quando rastreadores trocam identificadores entre si para te seguir em múltiplos sites *(Conceito C)*
+6. **Ameaças de Hijacking** — detecta iframes ocultos, scripts suspeitos e redirecionamentos maliciosos *(Conceito C)*
+7. **Pontuação de Privacidade (0–100)** — resume tudo isso em um score visual que indica o quão invasiva é a página atual *(Conceito C)*
+8. **Interface de gerenciamento + relatório visual** — popup expansível com detalhes por categoria e botão de relatório completo *(Conceito B)*
+9. **Listas personalizadas de bloqueio e whitelist** — o usuário pode adicionar ou proteger domínios manualmente *(Conceito A)*
+10. **Diferenciação de rastreadores de 1ª e 3ª parte** — classifica e exibe separadamente rastreadores próprios do site e externos *(Conceito A)*
 
 ## Como Instalar no Firefox
 
@@ -12,8 +32,6 @@
 4. Clique em **"Carregar extensão temporária..."** (ou "Load Temporary Add-on...")
 5. Navegue até a pasta da extensão e selecione o arquivo `manifest.json`
 6. A extensão aparecerá no canto superior direito do navegador com o ícone de escudo
-
-> Extensões temporárias são removidas ao fechar o Firefox. Para uso permanente, use o Método 2.
 
 ### Método 2: Instalação via arquivo .zip
 
