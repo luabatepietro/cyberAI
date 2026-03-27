@@ -1,5 +1,4 @@
 /**
- * Privacy Shield - Background Script
  * 
  * Responsável por:
  * - Interceptar e analisar requisições HTTP

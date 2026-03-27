@@ -1,5 +1,4 @@
 /**
- * Privacy Shield - Content Script
  * 
  * Executa no contexto da página para detectar:
  * - Uso de localStorage / sessionStorage (HTML5)

@@ -1,5 +1,4 @@
 /**
- * Privacy Shield - Options Page Script
  * Gerencia configurações, listas de bloqueio e whitelist
  */
 

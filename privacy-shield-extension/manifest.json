@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Privacy Shield - Detector de Rastreadores",
+  "name": "OlhaMalandro",
   "version": "1.0.0",
   "description": "Extensão para detecção e bloqueio de rastreadores, análise de cookies, localStorage, canvas fingerprinting e pontuação de privacidade.",
   "author": "Insper - Cybersegurança",
@@ -34,7 +34,7 @@
       "48": "icons/icon-48.png",
       "96": "icons/icon-96.png"
     },
-    "default_title": "Privacy Shield",
+    "default_title": "OlhaMalandro",
     "default_popup": "popup/popup.html"
   },
   "options_ui": {
