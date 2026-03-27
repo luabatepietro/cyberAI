@@ -1,5 +1,4 @@
 /**
- * Privacy Shield - Popup Script
  * Gerencia a interface do popup e exibe os dados coletados
  */
 

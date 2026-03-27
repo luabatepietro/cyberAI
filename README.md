@@ -39,12 +39,12 @@ o que está acontecendo nos bastidores.
 2. Digite `about:debugging` na barra de endereço
 3. Clique em **"Este Firefox"**
 4. Clique em **"Carregar extensão temporária..."**
-5. Selecione o arquivo `privacy-shield-extension.zip`
+5. Selecione o arquivo `OlhaMalandro.zip`
 
 ## Arquitetura da Extensão
 
 ```
-privacy-shield-extension/
+OlhaMalandro-extension/
 ├── manifest.json          
 ├── background.js        
 ├── content.js         

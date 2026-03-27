@@ -348,9 +348,9 @@ try {
       initTabData(details.tabId, details.url);
     }
   });
-  console.log("[PrivacyShield] webNavigation listener registered");
+  console.log("OlhaMalandro] webNavigation listener registered");
 } catch (e) {
-  console.warn("[PrivacyShield] webNavigation not available:", e);
+  console.warn("[OlhaMalandro] webNavigation not available:", e);
 }
 
 // CRÍTICO: Inicializar dados para todas as abas já abertas quando a extensão carrega
@@ -360,9 +360,9 @@ browser.tabs.query({}).then((tabs) => {
       initTabData(tab.id, tab.url);
     }
   }
-  console.log("[PrivacyShield] Pre-initialized " + tabs.length + " tabs on startup");
+  console.log("[OlhaMalandro] Pre-initialized " + tabs.length + " tabs on startup");
 }).catch((e) => {
-  console.warn("[PrivacyShield] tabs.query failed:", e);
+  console.warn("[OlhaMalandro] tabs.query failed:", e);
 });
 
 browser.tabs.onRemoved.addListener((tabId) => {
